@@ -6,8 +6,9 @@ EXPOSE 443
 ENV DEBIAN_FRONTEND="noninteractive"
 RUN apt-get update && apt-get install -y \
     nginx-full \
+    systemd \
     curl \
-    && apt -y install snapd \
+    && apt -y install ufw snapd \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /etc/shadowsocks-rust
@@ -19,7 +20,6 @@ RUN ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
 ENV HOME="/root"
 COPY . $HOME
-RUN chown -R shadowsocks:shadowsocks $HOME
 RUN chmod +x $HOME/docker-entrypoint.sh && chmod +x $HOME/wait-for-it.sh
 
 WORKDIR $HOME

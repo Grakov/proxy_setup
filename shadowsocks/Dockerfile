@@ -5,18 +5,10 @@ EXPOSE 443
 
 ENV DEBIAN_FRONTEND="noninteractive"
 RUN apt-get update && apt-get install -y \
-    python3 \
-    python3-dev \
-    python-is-python3 \
-    python3-pip \
     nginx-full \
     curl \
-    sudo \
-    && apt install snapd \
+    && apt -y install snapd \
     && rm -rf /var/lib/apt/lists/*
-
-RUN snap install core && snap refresh core && snap install --classic certbot
-RUN ln -s /snap/bin/certbot /usr/bin/certbot
 
 RUN mkdir -p /etc/shadowsocks-rust
 COPY shadowsocks.conf /etc/shadowsocks-rust/config.json

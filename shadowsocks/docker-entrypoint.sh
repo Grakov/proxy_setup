@@ -1,16 +1,7 @@
 #!/bin/bash
 
-ufw default deny incoming
-ufw default allow outgoing
-ufw deny 9000
-ufw allow 80
-ufw allow 443
-ufw enable
-
-if ! [ -x "$(certbot --version)" ]; then
-  systemctl unmask snapd.service
-  systemctl enable snapd.service
-  systemctl start snapd.service
+if ! [ -x "$(whereis certbot | cut -d' ' -f2)" ]; then
+  service snapd start
   snap install core
   snap refresh core
   snap install --classic certbot

@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     nginx-full \
     systemd \
     curl \
-    && apt -y install ufw snapd \
+    && apt -y install snapd \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /etc/shadowsocks-rust
@@ -22,6 +22,7 @@ ENV HOME="/root"
 COPY . $HOME
 RUN chmod +x $HOME/docker-entrypoint.sh && chmod +x $HOME/wait-for-it.sh
 
+USER root
 WORKDIR $HOME
 ENV TZ=Europe/Helsinki
 

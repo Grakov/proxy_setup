@@ -8,8 +8,13 @@ RUN apt-get update && apt-get install -y \
     nginx-full \
     systemd \
     curl \
-    && apt -y install snapd \
+    python3 \
+    python-is-python3 \
+    python3-pip \
+    libaugeas0 \
     && rm -rf /var/lib/apt/lists/*
+
+RUN pip install certbot certbot-nginx
 
 RUN mkdir -p /etc/shadowsocks-rust
 COPY shadowsocks.conf /etc/shadowsocks-rust/config.json

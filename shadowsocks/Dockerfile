@@ -1,4 +1,4 @@
-FROM teddysun/shadowsocks-rust:debian-1.13.5
+FROM teddysun/shadowsocks-rust:debian-1.15.3
 
 EXPOSE 80
 EXPOSE 443
